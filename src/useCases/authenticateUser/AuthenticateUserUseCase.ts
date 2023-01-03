@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { client } from "../../prisma/client";
 import { compare } from "bcryptjs";
+import { sign } from "jsonwebtoken";
 
 interface IRequest {
   username: string;
@@ -32,7 +33,14 @@ class AuthenticateUserUseCase {
 
     //Gerar token do usuário
 
-    
+    const token = sign({}, "125d86b5-a459-4560-a781-45ceb150dea5", {
+      subject: userAlreadyExists.id,
+      expiresIn: "20s"
+    })
+
+    return { token }
     
   }
 }
+
+export { AuthenticateUserUseCase }
