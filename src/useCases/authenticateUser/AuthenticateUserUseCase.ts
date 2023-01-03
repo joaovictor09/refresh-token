@@ -33,7 +33,7 @@ class AuthenticateUserUseCase {
 
     //Gerar token do usuário
 
-    const token = sign({}, "125d86b5-a459-4560-a781-45ceb150dea5", {
+    const token = sign({}, process.env.SECRET_HASH_KEY, {
       subject: userAlreadyExists.id,
       expiresIn: "20s"
     })
